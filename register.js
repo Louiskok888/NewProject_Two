@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-
+const morgan = require('morgan');
+app.use(morgan('dev'));
 // MongoDB connection setup
 const connectToDatabase = async () => {
   if (mongoose.connection.readyState === 1) return;  // already connected
