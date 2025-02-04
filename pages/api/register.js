@@ -1,7 +1,6 @@
-// /pages/api/register.js
 import mongoose from 'mongoose';
 
-// Connect to MongoDB
+// MongoDB connection
 const connectToDatabase = async () => {
   if (mongoose.connection.readyState === 1) return;
   await mongoose.connect(process.env.MONGO_URI, {
@@ -20,14 +19,14 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 export default async (req, res) => {
-  // Allow requests from your frontend domain
-  res.setHeader('Access-Control-Allow-Origin', 'https://project-f8mrenutj-louiskok888s-projects.vercel.app');
+  // Add CORS headers to handle cross-origin requests
+  res.setHeader('Access-Control-Allow-Origin', 'https://project-f8mrenutj-louiskok888s-projects.vercel.app'); // Allow requests from this domain
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   
+  // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
-    // Handle preflight request
-    return res.status(200).end();
+    return res.status(200).end(); // Send 200 status for preflight checks
   }
 
   if (req.method === 'POST') {
