@@ -1,19 +1,17 @@
-// File: /pages/api/register.js
+// /pages/api/register.js
+
 import mongoose from 'mongoose';
 
-// Connect to MongoDB
+// MongoDB connection
 const connectToDatabase = async () => {
-  if (mongoose.connection.readyState === 1) {
-    return;
-  }
-
+  if (mongoose.connection.readyState === 1) return;
   await mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
 };
 
-// Define User Schema
+// User schema
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
